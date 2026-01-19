@@ -5,8 +5,11 @@ Application de classement et statistique d’e-sports ou de sports (en fonction 
 Permet à l'utilisateur de:
 
 1 - Créer un compte sécurisé. 
+
 2 - Regarder les statistiques et classement de joueurs, équipes dans une compétition.
+
 3 - Sélectionner des favoris pour trouver plus rapidement des informations (joueurs/équipes/compétitions)
+
 4 - Être prévenu des prochains matchs et/ou des nouveaux résultats
 
 Fonctionnalités principales : 
