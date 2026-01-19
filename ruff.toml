@@ -11,6 +11,7 @@ exclude = [
     "venv",
     "__pycache__",
     "migrations",
+    "uv.lock",
 ]
 
 # Affiche les corrections appliquées automatiquement
@@ -48,10 +49,6 @@ combine-as-imports = true
 force-sort-within-sections = true
 lines-after-imports = 2
 
-[dependency-groups]
-dev = [
-    "ruff>=0.14.13",
-]
 
 # -------------------------------------------------
 # Formatage du code
