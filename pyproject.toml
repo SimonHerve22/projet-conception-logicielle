@@ -6,5 +6,12 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "dotenv>=0.9.9",
+    "fandom-py>=0.2.1",
+    "pandas>=3.0.0",
+    "ruff>=0.14.13",
+]
+
+[dependency-groups]
+dev = [
     "ruff>=0.14.13",
 ]
