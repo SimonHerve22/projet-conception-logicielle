@@ -1,17 +1,14 @@
 from src.business_object.favoris import Favoris
 from src.dao.favorisDAO import FavorisDAO
+from src.league_service.league_api import LeagueAPI
 
 
 class FavoriteService:
-    def __init__(self, dao: FavorisDAO, team_api):
-        self.dao = dao
-        self.team_api = team_api
+    def __init__(self):
+        self.dao = FavorisDAO()
+        self.team_api = LeagueAPI()
 
     def add_favorite(self, user_id: str, team_id: str):
-        # Vérifier que l'équipe existe (via API)
-        if not self.team_api.team_exists(team_id):
-            raise ValueError("Equipe inconnue")
-
         # Vérifier doublon
         if self.dao.exists(user_id, team_id):
             raise ValueError("Déjà en favoris")
