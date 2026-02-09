@@ -107,6 +107,7 @@ def parse_lec_player_stats(html_content: str) -> pd.DataFrame:
 
     table = soup.find("table", class_=["wikitable", "sortable", "spstats"])
     if not table:
+        print(html_content)
         raise ValueError("Tableau de statistiques non trouvé dans le HTML")
 
     # En-têtes attendus (ordre Leaguepedia)

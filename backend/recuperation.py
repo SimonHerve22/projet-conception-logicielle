@@ -1,4 +1,3 @@
-
 # res = requests.get("https://lol.fandom.com/wiki/LEC/2024_Season/Summer_Season/Player_Statistics")
 
 

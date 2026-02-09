@@ -28,8 +28,6 @@ for row in rows:
 
 # Convertir en DataFrame pour une meilleure visualisation
 df = pd.DataFrame(player_data)
-print(df.head())
-print(len(df))
 
 df.columns = [
     "id",
@@ -58,4 +56,3 @@ df.columns = [
 ]
 
 print(df.head())
-print(df["jsp"])
