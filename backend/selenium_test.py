@@ -1,8 +1,9 @@
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from bs4 import BeautifulSoup
 
-liste_tournois = ['EU_LCS/Season_3/Spring_Season', 'EU_LCS/Season_3/Spring_Playoffs', 'EU_LCS/Season_3/Summer_Season', 'EU_LCS/Season_3/Summer_Playoffs',
+
+liste_tournois = ['EU_LCS/Season_3/Spring_Season', 'EU_LCS/Season_3/Spring_Playoffs', 'EU_LCS/Season_3/Summer_Season', 'EU_LCS/Season_3/Summer_Playoffs',
 'EU_LCS/2014_Season/Spring_Season', 'EU_LCS/2014_Season/Spring_Playoffs', 'EU_LCS/2014_Season/Summer_Season', 'EU_LCS/2014_Season/Summer_Playoffs',
 'EU_LCS/2015_Season/Spring_Season', 'EU_LCS/2015_Season/Spring_Playoffs', 'EU_LCS/2015_Season/Summer_Season', 'EU_LCS/2015_Season/Summer_Playoffs',
 'EU_LCS/2016_Season/Spring_Season', 'EU_LCS/2016_Season/Spring_Playoffs', 'EU_LCS/2016_Season/Summer_Season', 'EU_LCS/2016_Season/Summer_Playoffs',
@@ -23,7 +24,7 @@ liste_tournois = ['EU_LCS/Season_3/Spring_Season', 'EU_LCS/Season_3/Spring_Play
 'LEC/2025_Season/Summer_Season', 'LEC/2025_Season/Summer_Playoffs',
 'LEC/2026_Season/Versus_Season', 'LEC/2026_Season/Versus_Playoffs']
 
-liste_pages = ['Overview', 'Team Rosters', 'Picks & Bans', 'Match History', 'Champion Stats', 'Player Stats']
+liste_pages = ['Overview', 'Team Rosters', 'Picks & Bans', 'Match History', 'Champion Stats', 'Player Stats']
 
 driver = webdriver.Chrome()
 driver.get(
@@ -41,11 +42,11 @@ soup = BeautifulSoup(table_html, "html.parser")
 
 rows = soup.find_all("tr")
 
-data = []
+data = []
 for row in rows[1:]: # skip header
-cells = [cell.get_text(strip=True) for cell in row.find_all(["th", "td"])]
+    cells = [cell.get_text(strip=True) for cell in row.find_all(["th", "td"])]
 if cells:
-data.append(cells)
+    data.append(cells)
 
 # Exemple : afficher la première ligne joueur
 print(data[0])
