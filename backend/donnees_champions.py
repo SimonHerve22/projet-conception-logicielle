@@ -1,12 +1,8 @@
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+import requests
 import pandas as pd
 import os
 import time
-import requests
-
-
 
 liste_tournois = [
     "EU_LCS/Season_3/Spring_Season",
@@ -73,19 +69,71 @@ liste_tournois = [
     "LEC/2026_Season/Versus_Season",
     "LEC/2026_Season/Versus_Playoffs",
 ]
-# Dossier de sortie
-os.makedirs("exports_lec", exist_ok=True)
 
-driver = webdriver.Chrome()
-all_data = {}
+os.makedirs("exports_lec_champions", exist_ok=True)
+
+# 🔧 Fonction extraction nom champion depuis cellule image
+def extract_champion_name(cell):
+    img = cell.find("img", alt=True)
+    if img:
+        return img["alt"]
+
+    link = cell.find("a", title=True)
+    if link:
+        return link["title"]
+
+    return cell.get_text(strip=True)
+
+# 🔧 Fonction parsing tableau
+def parse_champion_table(html, tournoi):
+    soup = BeautifulSoup(html, "html.parser")
+    table = soup.select_one("table.wikitable")
+
+    if table is None:
+        print(f"❌ Pas de table : {tournoi}")
+        return None
+
+    headers = [th.get_text(strip=True) for th in table.select("tr th")]
+    rows = table.select("tr")[1:]
+
+    data = []
+
+    for row in rows:
+        cells = row.select("td")
+        if not cells:
+            continue
+
+        row_data = []
+        for i, cell in enumerate(cells):
+            if i == 0:
+                row_data.append(extract_champion_name(cell))
+            else:
+                row_data.append(cell.get_text(strip=True))
+
+        data.append(row_data)
+
+    df = pd.DataFrame(data)
+    df = df.iloc[3:]
+
+    df.columns = [
+            "Champion", "Games", "Pick/Ban%", "Bans", "Games", "Nb Joueurs", "Wins", 
+            "Loses", "Winrate", "Kills/Game", "Morts/Game", "Assists/Game", "KDA",
+            "Minions/Game", "Minions/Mins", "Vision/Game", "Vision/Mins", "Golds/Game", 
+            "Golds/Min", "Dégâts/Game", "Dégâts/Min", "Kill Participation", 
+            "Kill Share", "Gold Share", "Rôles"
+        ]
+
+    return df
+
+# 🚀 Scraping principal
 for tournoi in liste_tournois:
     try:
-        print(f"Scraping : {tournoi}")
+        print(f"Scraping Champion Stats : {tournoi}")
 
         url = "https://lol.fandom.com/api.php"
         params = {
             "action": "parse",
-            "page": f"{tournoi}/Player_Statistics",
+            "page": f"{tournoi}/Champion_Statistics",
             "prop": "text",
             "format": "json"
         }
@@ -93,48 +141,26 @@ for tournoi in liste_tournois:
         res = requests.get(url, params=params)
         res_json = res.json()
 
-        # ✔ gestion des pages absentes
         if "parse" not in res_json:
             print(f"❌ Page absente : {tournoi}")
             continue
 
         html = res_json["parse"]["text"]["*"]
-        soup = BeautifulSoup(html, "html.parser")
+        df = parse_champion_table(html, tournoi)
 
-        table = soup.select_one("table.wikitable")
-        if table is None:
-            print(f"❌ Pas de table : {tournoi}")
+        if df is None or df.empty:
             continue
 
-        rows = table.select("tr")
-        data = []
+        # 📁 Export CSV
+        filename = f"exports_lec_champions/{tournoi.replace('/', '_')}.csv"
+        df.to_csv(filename, index=False, encoding="utf-8-sig")
 
-        for row in rows[1:]:
-            cells = [c.get_text(strip=True) for c in row.select("th, td")]
-            if cells:
-                data.append(cells)
+        print(f"✔ Sauvegardé : {filename}")
 
-        df = pd.DataFrame(data)
-        df = df.iloc[4:]
-        df.columns = [ "ID", "Name", "Games", "Wins", "Loses", "Winrate", "Kills/Game", "Deaths/Game", "Assists/Game", "KDA", "CS/Game", "CS/Min", "Vision/Game", "Vision/Min", "Golds/Game", "Golds/Min", "Damage/Game", "Damage/Min", "Kill Participation", "Kill Shara", "Gold Share", "Nombre Champions", "Champs", ]
-
-        # sauvegarde par feuille
-        all_data[tournoi.replace("/", "_")] = df
+        # ⏱️ Pause pour éviter surcharge serveur
+        time.sleep(0.5)
 
     except Exception as e:
         print(f"Erreur pour {tournoi} : {e}")
 
-# ✔ Export Excel multi-feuilles
-with pd.ExcelWriter("stats_lec.xlsx", engine="openpyxl") as writer:
-    for sheet, df in all_data.items():
-        df.to_excel(writer, sheet_name=sheet[:31], index=False)
-        worksheet = writer.sheets[sheet[:31]] 
-        for column in worksheet.columns: 
-            max_length = 0 
-            column_letter = column[0].column_letter 
-            for cell in column: 
-                if cell.value: 
-                    max_length = max(max_length, len(str(cell.value))) 
-            worksheet.column_dimensions[column_letter].width = max_length + 2
-
-print("✔ Terminé")
+print("🏁 Scraping terminé")
