@@ -181,4 +181,4 @@ pyrightconfig.json
 
 # Ajout de database.db
 
-.db
+*.db
