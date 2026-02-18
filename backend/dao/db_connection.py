@@ -3,6 +3,8 @@
 import sqlite3
 from utils.singleton import Singleton
 
+import logging
+import re
 
 class DBConnection(metaclass=Singleton):
 

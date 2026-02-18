@@ -1,9 +1,8 @@
-import os
 import logging
 
 from utils.log_decorator import log
 from utils.singleton import Singleton
-from backend.dao.db_connection import DBConnection
+from dao.db_connection import DBConnection
 
 
 class ResetDatabase(metaclass=Singleton):
@@ -12,24 +11,35 @@ class ResetDatabase(metaclass=Singleton):
     """
 
     @log
-    def lancer(self, test_dao=False):
+    def lancer(self):
 
-        init_db = open("database/init_db.sql", encoding="utf-8")
-        init_db_as_string = init_db.read()
-        init_db.close()
+        # Lecture des fichiers SQL
 
-        data_test_db = open("database/data_test_db.sql", encoding="utf-8")
-        data_test_db_as_string = data_test_db.read()
-        data_test_db.close()
+        with open("database/init_db.sql", encoding="utf-8") as f:
+            init_db_as_string = f.read()
+
+        with open("database/data_test_db.sql", encoding="utf-8") as f:
+            data_test_db_as_string = f.read()
 
         try:
-            with DBConnection().connection as connection:
-                with connection.cursor() as cursor:
-                    cursor.execute(init_db_as_string)
-                    cursor.execute(data_test_db_as_string)
+            # Ouvre la connexion à SQLite
+            connection = DBConnection().connection
+
+            # Avec SQLite on peut exécuter plusieurs instructions SQL d'un coup
+            # grâce à executescript()
+            connection.executescript(init_db_as_string)
+            connection.executescript(data_test_db_as_string)
+
+            # Valide les modifications
+            connection.commit()
+
         except Exception as e:
             logging.info(e)
             raise
+
+        finally:
+            # Ferme la connexion
+            connection.close()
 
         return True
 
