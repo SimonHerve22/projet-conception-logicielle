@@ -28,7 +28,7 @@ class ResetDatabase(metaclass=Singleton):
             # Avec SQLite on peut exécuter plusieurs instructions SQL d'un coup
             # grâce à executescript()
             connection.executescript(init_db_as_string)
-            connection.executescript(data_test_db_as_string)
+            # connection.executescript(data_test_db_as_string)
 
             # Valide les modifications
             connection.commit()
