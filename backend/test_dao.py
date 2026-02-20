@@ -1,7 +1,8 @@
-from dao.utilisateur_dao import UtilisateurDAO
-from dao.favoris_dao import FavorisDAO
-from business_object.utilisateur import Utilisateur
 from business_object.favoris import Favoris
+from business_object.utilisateur import Utilisateur
+from dao.favoris_dao import FavorisDAO
+from dao.utilisateur_dao import UtilisateurDAO
+
 
 def main():
     print("=== TEST DAO ===")
@@ -12,11 +13,7 @@ def main():
 
     # 1️⃣ Ajout d'utilisateurs
     print("\n--- Ajout d'utilisateurs ---")
-    utilisateurs = [
-        Utilisateur("alice"),
-        Utilisateur("bob"),
-        Utilisateur("charlie")
-    ]
+    utilisateurs = [Utilisateur("alice"), Utilisateur("bob"), Utilisateur("charlie")]
 
     for u in utilisateurs:
         try:
@@ -36,7 +33,7 @@ def main():
         Favoris("alice", "G2 Esports"),
         Favoris("alice", "Fnatic"),
         Favoris("bob", "Team Vitality"),
-        Favoris("charlie", "MAD Lions KOI")
+        Favoris("charlie", "MAD Lions KOI"),
     ]
 
     for f in favoris:
@@ -64,6 +61,7 @@ def main():
     print("Bob supprimé")
     print("Liste utilisateurs : ", utilisateur_dao.lister())
     print("Liste favoris Bob : ", favoris_dao.lister("bob"))
+
 
 if __name__ == "__main__":
     main()

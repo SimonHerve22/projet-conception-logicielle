@@ -1,8 +1,8 @@
 import logging
 
+from dao.db_connection import DBConnection
 from utils.log_decorator import log
 from utils.singleton import Singleton
-from dao.db_connection import DBConnection
 
 
 class ResetDatabase(metaclass=Singleton):
@@ -12,14 +12,13 @@ class ResetDatabase(metaclass=Singleton):
 
     @log
     def lancer(self):
-
         # Lecture des fichiers SQL
 
         with open("database/init_db.sql", encoding="utf-8") as f:
             init_db_as_string = f.read()
 
-        with open("database/data_test_db.sql", encoding="utf-8") as f:
-            data_test_db_as_string = f.read()
+        # with open("database/data_test_db.sql", encoding="utf-8") as f:
+        # data_test_db_as_string = f.read()
 
         try:
             # Ouvre la connexion à SQLite

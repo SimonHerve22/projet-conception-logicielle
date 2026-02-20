@@ -3,7 +3,6 @@ from dao.db_connection import DBConnection
 
 
 class UtilisateurDAO:
-
     def ajouter(self, utilisateur: Utilisateur) -> None:
         """
         Ajoute un utilisateur en base.
@@ -13,8 +12,7 @@ class UtilisateurDAO:
 
         try:
             cursor.execute(
-                "INSERT INTO utilisateurs (pseudo) VALUES (?);",
-                (utilisateur.pseudo,)
+                "INSERT INTO utilisateurs (pseudo) VALUES (?);", (utilisateur.pseudo,)
             )
             connection.commit()
 
@@ -30,8 +28,7 @@ class UtilisateurDAO:
 
         try:
             cursor.execute(
-                "SELECT pseudo FROM utilisateurs WHERE pseudo = ?;",
-                (pseudo,)
+                "SELECT pseudo FROM utilisateurs WHERE pseudo = ?;", (pseudo,)
             )
 
             row = cursor.fetchone()
@@ -52,10 +49,7 @@ class UtilisateurDAO:
         cursor = connection.cursor()
 
         try:
-            cursor.execute(
-                "DELETE FROM utilisateurs WHERE pseudo = ?;",
-                (pseudo,)
-            )
+            cursor.execute("DELETE FROM utilisateurs WHERE pseudo = ?;", (pseudo,))
             connection.commit()
 
         finally:

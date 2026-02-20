@@ -3,7 +3,6 @@ from dao.db_connection import DBConnection
 
 
 class FavorisDAO:
-
     def ajouter(self, favorite: Favoris) -> None:
         """
         Ajoute un favori en utilisant le pseudo utilisateur.
@@ -15,8 +14,7 @@ class FavorisDAO:
         try:
             # Vérifie que l'utilisateur existe
             cursor.execute(
-                "SELECT id FROM utilisateurs WHERE pseudo = ?;",
-                (favorite.pseudo,)
+                "SELECT id FROM utilisateurs WHERE pseudo = ?;", (favorite.pseudo,)
             )
             result = cursor.fetchone()
             if result is None:
@@ -27,7 +25,7 @@ class FavorisDAO:
             # Ajoute le favori
             cursor.execute(
                 "INSERT INTO favoris (user_id, team_name) VALUES (?, ?);",
-                (user_id, favorite.team_name)
+                (user_id, favorite.team_name),
             )
             connection.commit()
 
@@ -48,7 +46,7 @@ class FavorisDAO:
                 WHERE user_id = (SELECT id FROM utilisateurs WHERE pseudo = ?)
                 AND team_name = ?;
                 """,
-                (pseudo, team_name)
+                (pseudo, team_name),
             )
             connection.commit()
 
@@ -70,7 +68,7 @@ class FavorisDAO:
                 JOIN utilisateurs u ON f.user_id = u.id
                 WHERE u.pseudo = ?;
                 """,
-                (pseudo,)
+                (pseudo,),
             )
 
             rows = cursor.fetchall()

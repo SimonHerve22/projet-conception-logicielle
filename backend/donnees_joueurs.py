@@ -1,8 +1,8 @@
+import os
+
 from bs4 import BeautifulSoup
 import pandas as pd
-import os
 import requests
-
 
 
 liste_tournois = [
@@ -74,6 +74,7 @@ os.makedirs("exports_lec", exist_ok=True)
 
 all_data = {}
 
+
 def extract_team_name(cell):
     # lien cliquable
     link = cell.find("a")
@@ -87,6 +88,7 @@ def extract_team_name(cell):
 
     # fallback texte
     return cell.get_text(strip=True)
+
 
 def extract_first_champion(cell):
     # lien direct
@@ -106,6 +108,7 @@ def extract_first_champion(cell):
 
     return ""
 
+
 for tournoi in liste_tournois:
     try:
         print(f"Scraping : {tournoi}")
@@ -115,7 +118,7 @@ for tournoi in liste_tournois:
             "action": "parse",
             "page": f"{tournoi}/Player_Statistics",
             "prop": "text",
-            "format": "json"
+            "format": "json",
         }
 
         res = requests.get(url, params=params)
@@ -142,7 +145,7 @@ for tournoi in liste_tournois:
             for i, c in enumerate(cols):
                 if i == 0:  # Team
                     cells.append(extract_team_name(c))
-                elif i == len(cols) - 1: # Champs
+                elif i == len(cols) - 1:  # Champs
                     cells.append(extract_first_champion(c))
                 else:
                     cells.append(c.get_text(strip=True))
@@ -158,10 +161,29 @@ for tournoi in liste_tournois:
             continue
 
         df.columns = [
-            "Equipe","Name","Games","Wins","Loses","Winrate","Kills/Game","Deaths/Game",
-            "Assists/Game","KDA","CS/Game","CS/Min","Vision/Game","Vision/Min",
-            "Golds/Game","Golds/Min","Damage/Game","Damage/Min","Kill Participation",
-            "Kill Share","Gold Share","Nombre Champions","Champs"
+            "Equipe",
+            "Name",
+            "Games",
+            "Wins",
+            "Loses",
+            "Winrate",
+            "Kills/Game",
+            "Deaths/Game",
+            "Assists/Game",
+            "KDA",
+            "CS/Game",
+            "CS/Min",
+            "Vision/Game",
+            "Vision/Min",
+            "Golds/Game",
+            "Golds/Min",
+            "Damage/Game",
+            "Damage/Min",
+            "Kill Participation",
+            "Kill Share",
+            "Gold Share",
+            "Nombre Champions",
+            "Champs",
         ]
 
         filename = f"exports_lec/{tournoi.replace('/', '_')}.csv"
