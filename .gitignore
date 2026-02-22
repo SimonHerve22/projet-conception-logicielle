@@ -182,3 +182,7 @@ pyrightconfig.json
 # Ajout de database.db
 
 *.db
+
+# logs
+
+*.log
