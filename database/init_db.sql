@@ -5,8 +5,9 @@ DROP TABLE IF EXISTS utilisateurs;
 -- Table des utilisateurs
 CREATE TABLE utilisateurs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    pseudo TEXT NOT NULL UNIQUE
-    );
+    pseudo TEXT NOT NULL UNIQUE,
+    hash_mdp TEXT NOT NULL    -- nouveau : hash du mot de passe
+);
 
 -- Table des favoris
 CREATE TABLE favoris (

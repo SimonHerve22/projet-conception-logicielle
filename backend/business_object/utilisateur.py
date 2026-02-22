@@ -1,5 +1,5 @@
 class Utilisateur:
-    def __init__(self, pseudo: str):
+    def __init__(self, pseudo: str, hash_mdp: bytes):
         if not isinstance(pseudo, str):
             raise TypeError("Le pseudo doit être une chaîne de caractères")
 
@@ -10,9 +10,18 @@ class Utilisateur:
 
         self.__pseudo = pseudo
 
+        if not isinstance(hash_mdp, bytes) or len(hash_mdp) == 0:
+            raise ValueError("Le hash du mot de passe est requis et doit être en bytes")
+
+        self.__hash_mdp = hash_mdp
+
     @property
     def pseudo(self) -> str:
         return self.__pseudo
+
+    @property
+    def hash_mdp(self) -> bytes:
+        return self.__hash_mdp
 
     def __repr__(self) -> str:
         return f"Utilisateur(pseudo='{self.__pseudo}')"

@@ -12,7 +12,8 @@ class UtilisateurDAO:
 
         try:
             cursor.execute(
-                "INSERT INTO utilisateurs (pseudo) VALUES (?);", (utilisateur.pseudo,)
+                "INSERT INTO utilisateurs (pseudo, hash_mdp) VALUES (?, ?);",
+                (utilisateur.pseudo, utilisateur.hash_mdp),
             )
             connection.commit()
 
@@ -28,7 +29,7 @@ class UtilisateurDAO:
 
         try:
             cursor.execute(
-                "SELECT pseudo FROM utilisateurs WHERE pseudo = ?;", (pseudo,)
+                "SELECT pseudo, hash_mdp FROM utilisateurs WHERE pseudo = ?;", (pseudo,)
             )
 
             row = cursor.fetchone()
@@ -36,8 +37,7 @@ class UtilisateurDAO:
             if row is None:
                 return None
 
-            return Utilisateur(row[0])
-
+            return Utilisateur(row[0], row[1])
         finally:
             cursor.close()
 
@@ -63,10 +63,10 @@ class UtilisateurDAO:
         cursor = connection.cursor()
 
         try:
-            cursor.execute("SELECT pseudo FROM utilisateurs;")
+            cursor.execute("SELECT pseudo, hash_mdp FROM utilisateurs;")
             rows = cursor.fetchall()
 
-            return [Utilisateur(row[0]) for row in rows]
+            return [Utilisateur(row[0], row[1]) for row in rows]
 
         finally:
             cursor.close()
