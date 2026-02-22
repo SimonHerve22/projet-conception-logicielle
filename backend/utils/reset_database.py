@@ -17,17 +17,14 @@ class ResetDatabase(metaclass=Singleton):
         with open("database/init_db.sql", encoding="utf-8") as f:
             init_db_as_string = f.read()
 
-        # with open("database/data_test_db.sql", encoding="utf-8") as f:
-        # data_test_db_as_string = f.read()
-
         try:
             # Ouvre la connexion à SQLite
-            connection = DBConnection().connection
+            db = DBConnection()
+            connection = db.connection
 
             # Avec SQLite on peut exécuter plusieurs instructions SQL d'un coup
             # grâce à executescript()
             connection.executescript(init_db_as_string)
-            # connection.executescript(data_test_db_as_string)
 
             # Valide les modifications
             connection.commit()
@@ -38,7 +35,7 @@ class ResetDatabase(metaclass=Singleton):
 
         finally:
             # Ferme la connexion
-            connection.close()
+            db.close()
 
         return True
 
