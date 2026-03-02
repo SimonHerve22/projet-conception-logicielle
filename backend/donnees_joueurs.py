@@ -125,7 +125,7 @@ for tournoi in liste_tournois:
         res_json = res.json()
 
         if "parse" not in res_json:
-            print(f"❌ Page absente : {tournoi}")
+            print(f"Page absente : {tournoi}")
             continue
 
         html = res_json["parse"]["text"]["*"]
@@ -133,7 +133,7 @@ for tournoi in liste_tournois:
 
         table = soup.select_one("table.wikitable")
         if table is None:
-            print(f"❌ Pas de table : {tournoi}")
+            print(f"Pas de table : {tournoi}")
             continue
 
         rows = table.select("tr")
@@ -157,7 +157,7 @@ for tournoi in liste_tournois:
 
         # sécurité colonnes
         if df.shape[1] != 23:
-            print(f"⚠ Colonnes inattendues ({df.shape[1]}) : {tournoi}")
+            print(f"Colonnes inattendues ({df.shape[1]}) : {tournoi}")
             continue
 
         df.columns = [
@@ -192,4 +192,4 @@ for tournoi in liste_tournois:
     except Exception as e:
         print(f"Erreur pour {tournoi} : {e}")
 
-print("✔ Terminé")
+print("Terminé")
