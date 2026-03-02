@@ -186,3 +186,7 @@ pyrightconfig.json
 # logs
 
 *.log
+
+# csv
+
+*.csv
