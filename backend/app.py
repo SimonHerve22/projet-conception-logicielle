@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
+from service.joueur_stat_service import PlayerStatService
+from service.utilisateur_service import UtilisateurService
 
 
 app = FastAPI(title="LOL_API")
+
+utilisateur_service = UtilisateurService()
+player_service = PlayerStatService()
 
 
 @app.get("/", include_in_schema=False)
@@ -11,28 +16,22 @@ async def redirect_to_docs():
     return RedirectResponse(url="/docs")
 
 
-@app.get("/connexion", tags=["Utilisateur"])
-async def connexion():
-    """Connecte un utilisateur à son compte"""
-    return "vous etes connecté"
+@app.get("/verifier_connexion/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+async def verifier_connexion(pseudo: str, mot_de_passe: str):
+    """verifie la connection d'un utilisateur à son compte"""
+    return utilisateur_service.verifier_connexion(pseudo, mot_de_passe)
 
 
-@app.post("/creation", tags=["Utilisateur"])
-async def creation():
+@app.post("/creation/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+async def creation(pseudo: str, mot_de_passe: str):
     """Creer un compte utilisateur"""
-    return "votre compte est creé"
+    return utilisateur_service.inscrire(pseudo, mot_de_passe)
 
 
-@app.delete("/suppression_utilisateur", tags=["Utilisateur"])
-async def suppression_utilisateur():
+@app.delete("/suppression_utilisateur/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+async def suppression_utilisateur(pseudo, mot_de_passe):
     """supprimme un compte utilisateur"""
-    return "votre compte est supprimmer"
-
-
-@app.get("/visualisation_utilisateur", tags=["Utilisateur"])
-async def visualisation_utilisateur():
-    """Visualisation du compte de l'utilisateur"""
-    return "voici les informations de votre compte"
+    return utilisateur_service.supprimer(pseudo, mot_de_passe)
 
 
 @app.put("/modification", tags=["Utilisateur"])
@@ -59,10 +58,11 @@ async def suppression_favori():
     return "l'equipe à été supprimé"
 
 
-@app.get("/stats", tags=["Statistiques"])
-async def statistique():
+@app.get("/import_stats/{annee}/{split}", tags=["Statistiques"])
+async def import_stats(annee, split):
     """affiche des stats"""
-    return "voici les stats demandé"
+    annee = int(annee)
+    return player_service.import_stats(annee, split)
 
 
 if __name__ == "__main__":
