@@ -1,5 +1,5 @@
 from dao.joueur_stat_dao import PlayerStatDAO
-from scrapper.scrapper import LeaguepediaPlayerScraper
+from infrastructure.joueur_stat_scraper import LeaguepediaPlayerScraper
 
 
 class PlayerStatService:
