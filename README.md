@@ -3,6 +3,7 @@ Pour que Python saches que backend contient les modules,Faire d'abord dans le te
 ```bash
 export PYTHONPATH=$(pwd)/backend
 ```
+http://127.0.0.1:8000/
 
 # projet-conception-logicielle
 
