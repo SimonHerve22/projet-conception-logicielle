@@ -1,3 +1,5 @@
+import sys
+
 from business_object.joueur_stat import PlayerStat
 from dao.joueur_stat_dao import PlayerStatDAO
 from infrastructure.joueur_stat_scraper import LeaguepediaPlayerScraper
@@ -92,3 +94,5 @@ if __name__ == "__main__":
     service = PlayerStatService()
     nb_joueurs = service.import_stats(2025, "Spring_Season")
     print(f"{nb_joueurs} joueurs ajoutés/mis à jour en base.")
+
+    print(sys.path)
