@@ -34,3 +34,8 @@ class PlayerStatService:
 
         print("Import terminé.")
         return len(stats)
+
+    def obtenir_stats_split(self, annee: int, split: str) -> list:
+        """Récupère les stats d'un split précis en base."""
+        tournoi_path = self._construire_tournoi(annee, split)
+        return self.dao.lister_par_tournoi(tournoi_path)
