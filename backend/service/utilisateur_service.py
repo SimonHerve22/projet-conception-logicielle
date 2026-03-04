@@ -25,7 +25,7 @@ class UtilisateurService:
 
         utilisateur = Utilisateur(pseudo, hash_mdp)
         self.dao.ajouter(utilisateur)
-        return utilisateur
+        return True  # utilisateur
 
     def verifier_connexion(self, pseudo: str, mot_de_passe: str) -> bool:
         """

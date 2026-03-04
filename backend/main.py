@@ -1,6 +1,6 @@
 from business_object.joueur_stat import PlayerStat
 from dao.joueur_stat_dao import PlayerStatDAO
-from scrapper.scrapper import LeaguepediaPlayerScraper
+from infrastructure.joueur_stat_scraper import LeaguepediaPlayerScraper
 from service.joueur_stat_service import PlayerStatService
 from service.utilisateur_service import UtilisateurService
 from utils.log_init import initialiser_logs
