@@ -1,6 +1,6 @@
 from InquirerPy import inquirer
 from utils.reset_database import ResetDatabase
-from view.vue_abstraite import VueAbstraite
+from views.vue_abstraite import VueAbstraite
 
 
 class AccueilVue(VueAbstraite):

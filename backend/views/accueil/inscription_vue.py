@@ -2,7 +2,7 @@ import os
 
 from inquirerPy import inquirer
 import requests
-from view.vue_abstraite import VueAbstraite
+from views.vue_abstraite import VueAbstraite
 
 
 host = os.environ["HOST_WEBSERVICE"]
