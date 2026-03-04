@@ -59,3 +59,18 @@ class MatchDAO:
 
         finally:
             cursor.close()
+
+    def lister_par_tournoi(self, tournoi: str) -> list[Match]:
+        """Retourne les Matchs d'un tournoi spécifique."""
+        connection = DBConnection().connection
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                "SELECT tournoi, date, patch, blue_team, red_team, winner "
+                "FROM matches WHERE tournoi = ?;",
+                (tournoi,),
+            )
+            rows = cursor.fetchall()
+            return [Match(*row) for row in rows]
+        finally:
+            cursor.close()

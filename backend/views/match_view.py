@@ -53,29 +53,51 @@ class MatchView:
             print(f"❌ Erreur lors du scraping : {e}")
 
     def _menu_liste(self):
-        print("\n📜 HISTORIQUE COMPLET DES MATCHS")
-        matches = self.service.dao.lister()
+        print("\n--- CONSULTATION DE L'HISTORIQUE ---")
+        print("1. Afficher TOUS les matchs en base")
+        print("2. Filtrer par SPLIT PRÉCIS (Année + Split)")
+        choix = input("Votre choix : ").strip()
 
-        if not matches:
-            print("La base est vide. Lancez un import pour commencer.")
+        matches = []
+        if choix == "1":
+            matches = self.service.dao.lister()
+        elif choix == "2":
+            try:
+                annee = int(input("Année (ex: 2026) : ").strip())
+                split = input("Split (ex: Spring_Season) : ").strip()
+                matches = self.service.obtenir_matchs_split(annee, split)
+
+                if not matches:
+                    print(f"\n⚠️ Aucun match trouvé pour {split} ({annee}).")
+                    print("L'import a-t-il bien été effectué ?")
+                    return
+            except ValueError:
+                print("❌ Erreur : L'année doit être un nombre.")
+                return
+        else:
+            print("⚠️ Choix invalide.")
             return
 
-        # Formatage du tableau
-        # Colonnes : Date (10), P (7), Blue (20), Red (20), Winner (20)
+        self._afficher_tableau_matchs(matches)
+
+    def _afficher_tableau_matchs(self, matches):
+        """Affiche les matchs avec un formatage propre."""
+        print("\n📜 RÉSULTATS DES MATCHS")
+        # Formatage du header
         header = f"{'Split':<35} | {'Date':<12} | {'Patch':<7} | {'🔵 Blue Team':<20} | {'🔴 Red Team':<20} | {'🏆 Winner'}"
         print("-" * len(header))
         print(header)
         print("-" * len(header))
 
         for m in matches:
-            # On met en gras ou on ajoute une étoile pour le gagnant visuellement
+            # On ajoute une petite étoile visuelle pour le gagnant
             winner_display = f"⭐ {m.winner}"
-
             print(
                 f"{m.tournoi:<35} | {m.date:<12} | {m.patch:<7} | {m.blue_team:<21} | {m.red_team:<21} | {winner_display}"
             )
 
         print("-" * len(header))
+        print(f"Total : {len(matches)} matchs affichés.")
 
 
 # Point d'entrée pour tester la vue directement
