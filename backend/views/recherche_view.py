@@ -52,6 +52,6 @@ class RechercheVue(VueAbstraite):
                 return RechercheVue("Retour au menu de recherche")
 
             case "Retour au menu précédent":
-                from views.accueil.accueil_vue import AccueilVue
+                from views.accueil.accueil_vue import MenuVue
 
-                return AccueilVue("")
+                return MenuVue("")
