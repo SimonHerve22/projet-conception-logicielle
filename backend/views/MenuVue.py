@@ -1,5 +1,4 @@
-from InquirerPy import inquirer
-from utils.reset_database import ResetDatabase
+from InquirerPy import inquirer  # noqa: N999
 from views.vue_abstraite import VueAbstraite
 
 
