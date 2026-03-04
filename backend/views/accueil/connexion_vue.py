@@ -26,6 +26,12 @@ class ConnexionVue(VueAbstraite):
 
             return AccueilVue(message, temps_attente=2)
 
+        if not req.json():
+            message = "le pseudo ou le mot de passe est incorrect"
+            from views.accueil.accueil_vue import AccueilVue
+
+            return AccueilVue(message, temps_attente=2)
+
         # Connexion dans la session (avec l'ID seulement)
         Session().connexion(pseudo, mot_de_passe)
 

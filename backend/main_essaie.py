@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     initialiser_logs("Application")
 
-    vue_courante = AccueilVue("Bienvenue sur ENS-all-in")
+    vue_courante = AccueilVue("Bienvenue sur LOLEC stat")
     nb_erreurs = 0
 
     while vue_courante:
