@@ -21,7 +21,8 @@ class FavoriVue(VueAbstraite):
         # Récupération des favoris
         try:
             reponse = requests.get(f"{host}/favori/{Session().pseudo}")
-            boutons_favoris = reponse.json()
+            resultat = reponse.json()
+            boutons_favoris = [favori.get("team_name") for favori in resultat]
         except ValueError:
             boutons_favoris = []
 

@@ -19,6 +19,8 @@ class InfosSessionVue(VueAbstraite):
             return AccueilVue(res, temps_attente=3)
 
         res += f"Joueur connecté : {session.pseudo}\n"
-        res += f"Début connexion : {getattr(session.pseudo, 'debut_connexion', 'N/A')}\n\n"
+        res += (
+            f"Début connexion : {getattr(session.pseudo, 'debut_connexion', 'N/A')}\n\n"
+        )
 
         return AccueilVue(res, temps_attente=3)

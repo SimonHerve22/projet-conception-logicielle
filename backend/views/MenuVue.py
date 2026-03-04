@@ -46,4 +46,3 @@ class MenuVue(VueAbstraite):
                 from views.accueil.InfosSessionVue import InfosSessionVue
 
                 return InfosSessionVue("Chargement...", temps_attente=0)
-

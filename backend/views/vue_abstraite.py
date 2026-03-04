@@ -6,7 +6,9 @@ import time
 class VueAbstraite(ABC):
     """Modèle de Vue"""
 
-    def __init__(self, message: str = "", temps_attente: int = 0, input_attente: bool = False):
+    def __init__(
+        self, message: str = "", temps_attente: int = 0, input_attente: bool = False
+    ):
         self.message = message
         self.temps_attente = temps_attente
         self.input_attente = input_attente

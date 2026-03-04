@@ -40,7 +40,8 @@ class Session(metaclass=Singleton):
             return None
         try:
             resp = requests.get(
-                f"{self.host}/utilisateur/verifier_creation/{self.pseudo}/{self.mdp}")
+                f"{self.host}/utilisateur/verifier_creation/{self.pseudo}/{self.mdp}"
+            )
             if resp.status_code != 200:
                 return None
             return resp.json()
