@@ -1,0 +1,51 @@
+from InquirerPy import inquirer
+from utils.reset_database import ResetDatabase
+from views.vue_abstraite import VueAbstraite
+
+
+class MenuVue(VueAbstraite):
+    """Vue d'accueil de l'application"""
+
+    def choisir_menu(self):
+        """Choix du menu suivant
+
+        Return
+        ------
+        view
+            Retourne la vue choisie par l'utilisateur dans le terminal
+        """
+
+        print("\n" + "-" * 50 + "\nAccueil\n" + "-" * 50 + "\n")
+
+        choix = inquirer.select(
+            message="Faites votre choix : ",
+            choices=[
+                "Il faut mettre des trucs à faire dans l'application",
+            ],
+        ).execute()
+
+        match choix:
+            case "Quitter":
+                pass
+
+            case "Se connecter":
+                from views.accueil.connexion_vue import ConnexionVue
+
+                return ConnexionVue("Connexion à l'application")
+
+            case "Créer un compte":
+                from views.accueil.inscription_vue import InscriptionVue
+
+                return InscriptionVue("Création de compte joueur")
+
+            case "Infos de session":
+                from views.accueil.InfosSessionVue import InfosSessionVue
+
+                return InfosSessionVue("Chargement...", temps_attente=0)
+
+            case "Ré-initialiser la base de données":
+                succes = ResetDatabase().lancer()
+                message = (
+                    f"Ré-initilisation de la base de données - {'SUCCES' if succes else 'ECHEC'}"
+                )
+                return MenuVue(message)
