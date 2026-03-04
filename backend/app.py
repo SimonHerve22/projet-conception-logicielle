@@ -22,43 +22,43 @@ async def redirect_to_docs():
     return RedirectResponse(url="/docs")
 
 
-@app.get("/verifier_creation/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+@app.get("/utilisateur/verifier_creation/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
 async def verifier_creation(pseudo: str, mot_de_passe: str):
     """verifie l'existance d'un utilisateur"""
     return utilisateur_service.verifier_connexion(pseudo, mot_de_passe)
 
 
-@app.post("/creation/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+@app.post("/utilisateur/creation/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
 async def creation(pseudo: str, mot_de_passe: str):
     """Creer un compte utilisateur"""
     return utilisateur_service.inscrire(pseudo, mot_de_passe)
 
 
-@app.delete("/suppression_utilisateur/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+@app.delete("/utilisateur/suppression_utilisateur/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
 async def suppression_utilisateur(pseudo, mot_de_passe):
     """supprimme un compte utilisateur"""
     return utilisateur_service.supprimer(pseudo, mot_de_passe)
 
 
-@app.put("/ajouter/{pseudo}/{team_name}", tags=["Favori"])
+@app.put("/favori/ajouter/{pseudo}/{team_name}", tags=["Favori"])
 async def ajouterfavori(pseudo, team_name):
     """ajoute une equipe à la liste des favoris"""
     return favoris_service.ajouter_favori(pseudo, team_name)
 
 
-@app.get("/{pseudo}", tags=["Favori"])
+@app.get("/favori/{pseudo}", tags=["Favori"])
 async def liste_favori(pseudo):
     """renvoie la liste des favoris"""
     return favoris_service.lister_favoris(pseudo)
 
 
-@app.delete("/suppression/{pseudo}/{team_name}", tags=["Favori"])
+@app.delete("/favori/suppression/{pseudo}/{team_name}", tags=["Favori"])
 async def suppression_favori(pseudo, team_name):
     """supprime une équipe des favoris"""
     return favoris_service.supprimer_favori(pseudo, team_name)
 
 
-@app.get("/import_stats/{annee}/{split}", tags=["Statistiques"])
+@app.get("/import_stats/{annee}/{split}", tags=["Import"])
 async def import_stats(annee, split):
     """Scrape et persiste les joueurs.
         Retourne le nombre d'éléments importés."""
@@ -66,7 +66,7 @@ async def import_stats(annee, split):
     return player_service.import_stats(annee, split)
 
 
-@app.get("/import_standings/{annee}/{split}", tags=["Statistiques"])
+@app.get("/import_standings/{annee}/{split}", tags=["Import"])
 async def import_standings(annee, split):
     """Scrape et persiste les classements des équipes.
         Retourne le nombre d'éléments importés."""
@@ -74,7 +74,7 @@ async def import_standings(annee, split):
     return standings_service.import_standings(annee, split)
 
 
-@app.get("/import_matches/{annee}/{split}", tags=["Statistiques"])
+@app.get("/import_matches/{annee}/{split}", tags=["Import"])
 async def import_matches(annee, split):
     """Scrape et persiste les matchs.
         Retourne le nombre d'éléments importés."""
