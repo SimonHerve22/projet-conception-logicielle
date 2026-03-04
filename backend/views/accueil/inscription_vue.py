@@ -6,7 +6,7 @@ from views.vue_abstraite import VueAbstraite
 
 
 host = os.environ["HOST_WEBSERVICE"]
-END_POINT = "/utilisateur/"
+END_POINT = "/utilisateur"
 
 
 class InscriptionVue(VueAbstraite):
@@ -15,9 +15,12 @@ class InscriptionVue(VueAbstraite):
         pseudo = inquirer.text(message="Entrez votre pseudo : ").execute()
         valide = False
         while not valide:
-            mot_de_passe = inquirer.text(message="Entrez votre mot de passe : ").execute()
+            mot_de_passe = inquirer.text(
+                message="Entrez votre mot de passe : "
+            ).execute()
             mot_de_passe2 = inquirer.text(
-                message="Veuillez confirmer votre mot de passe : ").execute()
+                message="Veuillez confirmer votre mot de passe : "
+            ).execute()
             if mot_de_passe == mot_de_passe2:
                 valide = True
 
