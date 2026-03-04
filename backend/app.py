@@ -34,7 +34,9 @@ async def creation(pseudo: str, mot_de_passe: str):
     return utilisateur_service.inscrire(pseudo, mot_de_passe)
 
 
-@app.delete("/utilisateur/suppression_utilisateur/{pseudo}/{mot_de_passe}", tags=["Utilisateur"])
+@app.delete(
+    "/utilisateur/suppression_utilisateur/{pseudo}/{mot_de_passe}", tags=["Utilisateur"]
+)
 async def suppression_utilisateur(pseudo, mot_de_passe):
     """supprimme un compte utilisateur"""
     return utilisateur_service.supprimer(pseudo, mot_de_passe)
@@ -58,28 +60,29 @@ async def suppression_favori(pseudo, team_name):
     return favoris_service.supprimer_favori(pseudo, team_name)
 
 
-@app.get("/import_stats/{annee}/{split}", tags=["Import"])
-async def import_stats(annee, split):
+@app.get("/obtenir_stats/{annee}/{split}", tags=["Import"])
+async def obtenir_stats(annee, split):
     """Scrape et persiste les joueurs.
-        Retourne le nombre d'éléments importés."""
+    Retourne le nombre d'éléments importés."""
     annee = int(annee)
     return player_service.import_stats(annee, split)
 
 
-@app.get("/import_standings/{annee}/{split}", tags=["Import"])
-async def import_standings(annee, split):
+@app.get("/obtenir_standings/{annee}/{split}", tags=["Import"])
+async def obtenir_standings(annee, split):
     """Scrape et persiste les classements des équipes.
-        Retourne le nombre d'éléments importés."""
+    Retourne le nombre d'éléments importés."""
     annee = int(annee)
     return standings_service.import_standings(annee, split)
 
 
-@app.get("/import_matches/{annee}/{split}", tags=["Import"])
-async def import_matches(annee, split):
+@app.get("/obtenir_matches/{annee}/{split}", tags=["Import"])
+async def obtenir_matches(annee, split):
     """Scrape et persiste les matchs.
-        Retourne le nombre d'éléments importés."""
+    Retourne le nombre d'éléments importés."""
     annee = int(annee)
     return match_service.import_matches(annee, split)
+
 
 if __name__ == "__main__":
     import uvicorn
