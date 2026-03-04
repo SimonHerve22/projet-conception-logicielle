@@ -33,17 +33,17 @@ class AccueilVue(VueAbstraite):
                 pass
 
             case "Se connecter":
-                from view.accueil.connexion_vue import ConnexionVue
+                from views.accueil.connexion_vue import ConnexionVue
 
                 return ConnexionVue("Connexion à l'application")
 
             case "Créer un compte":
-                from view.accueil.inscription_vue import InscriptionVue
+                from views.accueil.inscription_vue import InscriptionVue
 
                 return InscriptionVue("Création de compte joueur")
 
             case "Infos de session":
-                from view.accueil.InfosSessionVue import InfosSessionVue
+                from views.accueil.InfosSessionVue import InfosSessionVue
 
                 return InfosSessionVue("Chargement...", temps_attente=0)
 
