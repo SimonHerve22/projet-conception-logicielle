@@ -1,6 +1,6 @@
 import os
 
-from inquirerPy import inquirer
+from InquirerPy import inquirer
 import requests
 from views.vue_abstraite import VueAbstraite
 
@@ -29,6 +29,6 @@ class InscriptionVue(VueAbstraite):
         else:
             message = f"{req.status_code} {req.text} Erreur de connexion (pseudo ou mdp invalide)"
 
-        from view.accueil.accueil_vue import AccueilVue
+        from views.accueil.accueil_vue import AccueilVue
 
         return AccueilVue(message)
