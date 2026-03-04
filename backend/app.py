@@ -65,7 +65,7 @@ async def obtenir_stats(annee, split):
     """Scrape et persiste les joueurs.
     Retourne le nombre d'éléments importés."""
     annee = int(annee)
-    return player_service.import_stats(annee, split)
+    return player_service.obtenir_stats_split(annee, split)
 
 
 @app.get("/obtenir_standings/{annee}/{split}", tags=["Import"])
@@ -73,7 +73,7 @@ async def obtenir_standings(annee, split):
     """Scrape et persiste les classements des équipes.
     Retourne le nombre d'éléments importés."""
     annee = int(annee)
-    return standings_service.import_standings(annee, split)
+    return standings_service.obtenir_classement_split(annee, split)
 
 
 @app.get("/obtenir_matches/{annee}/{split}", tags=["Import"])
@@ -81,7 +81,7 @@ async def obtenir_matches(annee, split):
     """Scrape et persiste les matchs.
     Retourne le nombre d'éléments importés."""
     annee = int(annee)
-    return match_service.import_matches(annee, split)
+    return match_service.obtenir_matchs_split(annee, split)
 
 
 if __name__ == "__main__":
