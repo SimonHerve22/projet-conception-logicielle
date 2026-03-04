@@ -4,7 +4,7 @@ from views.vue_abstraite import VueAbstraite
 
 
 class MenuVue(VueAbstraite):
-    """Vue d'accueil de l'application"""
+    """Vue du menu de l'application"""
 
     def choisir_menu(self):
         """Choix du menu suivant
@@ -15,37 +15,36 @@ class MenuVue(VueAbstraite):
             Retourne la vue choisie par l'utilisateur dans le terminal
         """
 
-        print("\n" + "-" * 50 + "\nAccueil\n" + "-" * 50 + "\n")
+        print("\n" + "-" * 50 + "\nMenu\n" + "-" * 50 + "\n")
 
         choix = inquirer.select(
             message="Faites votre choix : ",
             choices=[
-                "Il faut mettre des trucs à faire dans l'application",
+                "Recherche",
+                "Gestion des favoris",
+                "Retour",
+                "Infos de session",
             ],
         ).execute()
 
         match choix:
-            case "Quitter":
-                pass
+            case "Retour":
+                from views.accueil.accueil_vue import AccueilVue
 
-            case "Se connecter":
-                from views.accueil.connexion_vue import ConnexionVue
+                return AccueilVue("Accueil de l'application")
 
-                return ConnexionVue("Connexion à l'application")
+            case "Gestion des favoris":
+                from views.favori_vue import FavoriVue
 
-            case "Créer un compte":
-                from views.accueil.inscription_vue import InscriptionVue
+                return FavoriVue("Menu des favoris")
 
-                return InscriptionVue("Création de compte joueur")
+            case "Recherche":
+                from views.recherche_view import RechercheVue
+
+                return RechercheVue("Création de compte joueur")
 
             case "Infos de session":
                 from views.accueil.InfosSessionVue import InfosSessionVue
 
                 return InfosSessionVue("Chargement...", temps_attente=0)
 
-            case "Ré-initialiser la base de données":
-                succes = ResetDatabase().lancer()
-                message = (
-                    f"Ré-initilisation de la base de données - {'SUCCES' if succes else 'ECHEC'}"
-                )
-                return MenuVue(message)
