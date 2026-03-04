@@ -28,6 +28,22 @@ class MatchService:
         return len(matches)
 
     def obtenir_matchs_split(self, annee: int, split: str) -> list:
-        """Récupère les stats d'un split précis en base."""
+        """
+        Récupère les matchs en base. Si la base est vide pour ce split,
+        lance automatiquement le scraping, enregistre, puis retourne les données.
+        """
         tournoi_path = self._construire_tournoi(annee, split)
-        return self.dao.lister_par_tournoi(tournoi_path)
+
+        # 1. On tente de récupérer en base
+        matches = self.dao.lister_par_tournoi(tournoi_path)
+
+        # 2. Si la liste est vide, on déclenche l'import automatique
+        if not matches:
+            print(
+                f"🔍 Données non trouvées en local. Scraping de {tournoi_path} en cours..."
+            )
+            self.import_matches(annee, split)
+            # 3. On récupère à nouveau après l'import
+            matches = self.dao.lister_par_tournoi(tournoi_path)
+
+        return matches

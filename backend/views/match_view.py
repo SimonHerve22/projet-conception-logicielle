@@ -55,7 +55,7 @@ class MatchView:
     def _menu_liste(self):
         print("\n--- CONSULTATION DE L'HISTORIQUE ---")
         print("1. Afficher TOUS les matchs en base")
-        print("2. Filtrer par SPLIT PRÉCIS (Année + Split)")
+        print("2. Consulter un SPLIT PRÉCIS (Scraping auto si besoin)")
         choix = input("Votre choix : ").strip()
 
         matches = []
@@ -64,21 +64,25 @@ class MatchView:
         elif choix == "2":
             try:
                 annee = int(input("Année (ex: 2026) : ").strip())
-                split = input("Split (ex: Spring_Season) : ").strip()
+                split = input("Split (ex: Versus_Season) : ").strip()
+
+                # Le service s'occupe de tout (check DB ou Scraping)
                 matches = self.service.obtenir_matchs_split(annee, split)
 
-                if not matches:
-                    print(f"\n⚠️ Aucun match trouvé pour {split} ({annee}).")
-                    print("L'import a-t-il bien été effectué ?")
-                    return
             except ValueError:
                 print("❌ Erreur : L'année doit être un nombre.")
+                return
+            except Exception as e:
+                print(f"❌ Erreur lors de la récupération : {e}")
                 return
         else:
             print("⚠️ Choix invalide.")
             return
 
-        self._afficher_tableau_matchs(matches)
+        if matches:
+            self._afficher_tableau_matchs(matches)
+        else:
+            print("Empty : Aucun match trouvé sur Leaguepedia pour ce split.")
 
     def _afficher_tableau_matchs(self, matches):
         """Affiche les matchs avec un formatage propre."""

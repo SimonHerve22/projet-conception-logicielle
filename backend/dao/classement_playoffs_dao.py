@@ -83,3 +83,21 @@ class PlayoffResultDAO:
 
         finally:
             cursor.close()
+
+    def lister_par_tournoi(self, tournoi: str) -> list[PlayoffResult]:
+        """Retourne les résultats de playoffs d'un tournoi spécifique."""
+        connection = DBConnection().connection
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                """
+                SELECT tournoi, place, qualification, equipe
+                FROM playoff_results
+                WHERE tournoi = ?;
+                """,
+                (tournoi,),
+            )
+            rows = cursor.fetchall()
+            return [PlayoffResult(*row) for row in rows]
+        finally:
+            cursor.close()

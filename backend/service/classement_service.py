@@ -56,3 +56,31 @@ class StandingsService:
 
         print("Import terminé.")
         return count
+
+    def obtenir_classement_split(self, annee: int, split: str) -> list:
+        """
+        Récupère le classement en base (Saison régulière ou Playoffs).
+        Si absent, lance le scraping automatiquement.
+        """
+        tournoi_path = self._construire_tournoi(annee, split)
+        is_playoff = "Playoffs" in tournoi_path
+
+        # 1. Tentative de récupération en base
+        if is_playoff:
+            results = self.playoff_dao.lister_par_tournoi(tournoi_path)
+        else:
+            results = self.regular_dao.lister_par_tournoi(tournoi_path)
+
+        # 2. Si rien en base, on déclenche l'import automatique
+        if not results:
+            print(
+                f"🔍 Classement non trouvé localement pour {tournoi_path}. Scraping en cours..."
+            )
+            self.import_standings(annee, split)
+            # 3. On récupère les données fraîchement enregistrées
+            if is_playoff:
+                results = self.playoff_dao.lister_par_tournoi(tournoi_path)
+            else:
+                results = self.regular_dao.lister_par_tournoi(tournoi_path)
+
+        return results

@@ -85,3 +85,21 @@ class RegularSeasonStandingDAO:
 
         finally:
             cursor.close()
+
+    def lister_par_tournoi(self, tournoi: str) -> list[RegularSeasonStanding]:
+        """Retourne les classements de saison régulière d'un tournoi spécifique."""
+        connection = DBConnection().connection
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                """
+                SELECT tournoi, rang, equipe, score, winrate, streak
+                FROM regular_season_standings
+                WHERE tournoi = ?;
+                """,
+                (tournoi,),
+            )
+            rows = cursor.fetchall()
+            return [RegularSeasonStanding(*row) for row in rows]
+        finally:
+            cursor.close()

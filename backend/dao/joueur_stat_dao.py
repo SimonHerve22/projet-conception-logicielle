@@ -101,11 +101,18 @@ class PlayerStatDAO:
         cursor = connection.cursor()
         try:
             cursor.execute(
-                "SELECT tournoi, equipe, name, games, wins, losses, winrate, kda, kill_participation, main_champion "
-                "FROM player_stats WHERE tournoi = ?;",
+                """
+                SELECT tournoi, equipe, name, games, wins, losses, winrate, kda, kill_participation, main_champion
+                FROM player_stats
+                WHERE tournoi = ?;
+                """,
                 (tournoi,),
             )
             rows = cursor.fetchall()
+            from business_object.joueur_stat import (
+                PlayerStat,
+            )  # Import local si nécessaire
+
             return [PlayerStat(*row) for row in rows]
         finally:
             cursor.close()

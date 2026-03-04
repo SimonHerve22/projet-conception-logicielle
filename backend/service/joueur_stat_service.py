@@ -36,6 +36,22 @@ class PlayerStatService:
         return len(stats)
 
     def obtenir_stats_split(self, annee: int, split: str) -> list:
-        """Récupère les stats d'un split précis en base."""
+        """
+        Récupère les stats d'un split en base.
+        Si absentes, lance le scraping automatiquement.
+        """
         tournoi_path = self._construire_tournoi(annee, split)
-        return self.dao.lister_par_tournoi(tournoi_path)
+
+        # 1. Tentative de récupération en base
+        stats = self.dao.lister_par_tournoi(tournoi_path)
+
+        # 2. Si rien en base, on déclenche l'import automatique
+        if not stats:
+            print(
+                f"🔍 Stats non trouvées localement pour {tournoi_path}. Scraping en cours..."
+            )
+            self.import_stats(annee, split)
+            # 3. On récupère les données fraîchement enregistrées
+            stats = self.dao.lister_par_tournoi(tournoi_path)
+
+        return stats
