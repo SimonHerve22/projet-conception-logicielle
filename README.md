@@ -1,3 +1,9 @@
+Pour que Python saches que backend contient les modules,Faire d'abord dans le terminal à la racine du projet:
+
+```bash
+export PYTHONPATH=$(pwd)/backend
+```
+
 # projet-conception-logicielle
 
 Application de classement et statistique d’e-sports ou de sports (en fonction des bbd et api disponible)
