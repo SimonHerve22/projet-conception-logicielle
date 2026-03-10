@@ -22,7 +22,7 @@ class FavoriVue(VueAbstraite):
         try:
             reponse = requests.get(f"{host}/favori/{Session().pseudo}")
             resultat = reponse.json()
-            boutons_favoris = [favori.get("team_name") for favori in resultat]
+            boutons_favoris = [favori["_Favoris__team_name"] for favori in resultat]
         except ValueError:
             boutons_favoris = []
 
