@@ -23,4 +23,4 @@ class InfosSessionVue(VueAbstraite):
             f"Début connexion : {getattr(session.pseudo, 'debut_connexion', 'N/A')}\n\n"
         )
 
-        return AccueilVue(res, temps_attente=3)
+        return MenuVue(res, temps_attente=3)
