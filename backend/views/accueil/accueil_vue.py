@@ -23,7 +23,6 @@ class AccueilVue(VueAbstraite):
                 "Se connecter",
                 "Créer un compte",
                 "Ré-initialiser la base de données",
-                "Infos de session",
                 "Quitter",
             ],
         ).execute()
