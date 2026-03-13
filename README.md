@@ -1,8 +1,34 @@
+# Architecture
+
+```mermaid
+flowchart TB
+
+TUI["Interface TUI<br>(vues)"]
+API["API interne<br>(endpoints)"]
+SERVICES["Services<br>(logique métier)"]
+MODELES["Objets métiers<br>(Utilisateur, Favoris, Dataclasses)"]
+DAO["DAO<br>(accès aux données)"]
+BDD["Base de données<br>(SQLite)"]
+CLIENT["Client API externe<br>(Leaguepedia)"]
+
+TUI --> API
+API --> SERVICES
+SERVICES --> MODELES
+SERVICES --> DAO
+DAO --> BDD
+SERVICES --> CLIENT
+```
+
+# pythonpath
+
 Pour que Python saches que backend contient les modules,Faire d'abord dans le terminal à la racine du projet:
 
 ```bash
 export PYTHONPATH=$(pwd)/backend
 ```
+
+# localhost
+
 http://127.0.0.1:8000/
 
 # projet-conception-logicielle
