@@ -1,6 +1,7 @@
 import os
 
 from views.accueil.accueil_vue import AccueilVue
+from views.MenuVue import MenuVue
 from views.session import Session
 from views.vue_abstraite import VueAbstraite
 
