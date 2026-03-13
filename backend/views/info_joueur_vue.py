@@ -59,7 +59,7 @@ class InfoJoueurVue(VueAbstraite):
                     break
 
             if joueur:
-                print(f"Équipe : {joueur.get('team')}")
+                print(f"Équipe : {joueur.get('equipe')}")
                 print(f"Tournoi : {joueur.get('tournoi', '')}")
                 print(f"KDA : {joueur.get('kda')}")
                 print(f"Winrate : {joueur.get('winrate')}%")
