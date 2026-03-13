@@ -3,20 +3,31 @@
 ```mermaid
 flowchart TB
 
+%% Définition des nœuds
 TUI["Interface TUI<br>(vues)"]
-API["API interne<br>(endpoints)"]
+API["API<br>(endpoints / routes)"]
 SERVICES["Services<br>(logique métier)"]
-MODELES["Objets métiers<br>(Utilisateur, Favoris, Dataclasses)"]
+MODELES["Classes<br>(dataclasses)"]
 DAO["DAO<br>(accès aux données)"]
 BDD["Base de données<br>(SQLite)"]
-CLIENT["Client API externe<br>(Leaguepedia)"]
+CLIENT["Client API<br>(service externe)"]
 
+%% Flux
 TUI --> API
 API --> SERVICES
 SERVICES --> MODELES
 SERVICES --> DAO
 DAO --> BDD
 SERVICES --> CLIENT
+
+%% Styles / couleurs
+style TUI fill:#B3D4FC,stroke:#0366D6,stroke-width:2px
+style API fill:#CDEAC0,stroke:#2C7A0B,stroke-width:2px
+style SERVICES fill:#FFF3BF,stroke:#D4A500,stroke-width:2px
+style MODELES fill:#F5C6AA,stroke:#B34700,stroke-width:2px
+style DAO fill:#D6D6D6,stroke:#4D4D4D,stroke-width:2px
+style BDD fill:#A1D0D0,stroke:#0D7377,stroke-width:2px
+style CLIENT fill:#F6C1C1,stroke:#B91C1C,stroke-width:2px
 ```
 
 # pythonpath
