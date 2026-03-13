@@ -5,12 +5,12 @@ flowchart TB
 
 %% Définition des nœuds
 TUI["Interface TUI<br>(vues)"]
-API["API<br>(endpoints / routes)"]
-SERVICES["Services<br>(logique métier)"]
-MODELES["Classes<br>(dataclasses)"]
+API["API interne<br>(endpoints / routes)"]
+SERVICES["Services"]
+MODELES["Classes<br>(utilisateur/favoris/dataclasses)"]
 DAO["DAO<br>(accès aux données)"]
 BDD["Base de données<br>(SQLite)"]
-CLIENT["Client API<br>(service externe)"]
+CLIENT["Client API externe<br>(leaguepedia)"]
 
 %% Flux
 TUI --> API
