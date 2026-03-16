@@ -10,12 +10,11 @@ host = os.environ["HOST_WEBSERVICE"]
 
 
 class MatchVue(VueAbstraite):
-    def afficher_menu(self):
+    def choisir_menu(self):
         print("\n" + "═" * 60)
         print("      ⚔️  LEC MATCH HISTORY - DASHBOARD ⚔️")
         print("═" * 60)
 
-        print("\n" + "-" * 50 + f"\n{self.jpseudo}\n" + "-" * 50 + "\n")
         print("Un exemple qui existe est LEC/2025_Season/Summer_Playoffs")
 
         annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()

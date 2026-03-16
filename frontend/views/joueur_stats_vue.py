@@ -82,10 +82,21 @@ class JoueurStatsVue(VueAbstraite):
 
             choix = inquirer.select(
                 message="Faites votre choix :",
-                choices=["Retour menu"],
+                choices=["Ajouter aux favoris", "Retour menu"],
             ).execute()
 
             if choix == "Retour menu":
+                message = f"Vous êtes connecté sous le pseudo {Session().pseudo}"
+                from views.menu_vue import MenuVue
+
+                return MenuVue(message, temps_attente=1)
+
+            if choix == "Ajouter le joueur en favori":
+                url = f"{host}/favori/ajouter/{Session().pseudo}/{self.jpseudo}"
+                try:
+                    requests.put(url)
+                except ValueError:
+                    print("Erreur lors de l'ajout du favori")
                 message = f"Vous êtes connecté sous le pseudo {Session().pseudo}"
                 from views.menu_vue import MenuVue
 

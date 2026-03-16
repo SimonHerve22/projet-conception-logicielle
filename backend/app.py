@@ -5,9 +5,12 @@ from service.favoris_service import FavorisService
 from service.joueur_stat_service import PlayerStatService
 from service.match_service import MatchService
 from service.utilisateur_service import UtilisateurService
+from utils.log_init import initialiser_logs
 
 
 app = FastAPI(title="LOL_API")
+
+initialiser_logs("Application")
 
 utilisateur_service = UtilisateurService()
 favoris_service = FavorisService()
