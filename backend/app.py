@@ -6,8 +6,10 @@ from service.joueur_stat_service import PlayerStatService
 from service.match_service import MatchService
 from service.utilisateur_service import UtilisateurService
 from utils.log_init import initialiser_logs
+from utils.reset_database import ResetDatabase
 
 
+ResetDatabase().lancer()
 app = FastAPI(title="LOL_API")
 
 initialiser_logs("Application")
