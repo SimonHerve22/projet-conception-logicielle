@@ -18,7 +18,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: "{{defaultContext}}" # Répertoire de contexte (racine du repo par défaut)
+          context: ./backend
           file: ./backend/Dockerfile
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.BACKEND_APPLICATION }}:${{ github.ref_name }}

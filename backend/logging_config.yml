@@ -10,18 +10,9 @@ handlers:
     filename: logs/backend.log
     mode : w
     encoding: utf8
-  front_file:
-    class: logging.FileHandler
-    formatter: simple
-    filename: logs/frontend.log
-    mode : w
-    encoding: utf8
 loggers:
   backLogger:
     handlers: [back_file]
-    propagate: no
-  frontLogger:
-    handlers: [front_file]
     propagate: no
 root:
   level: INFO
