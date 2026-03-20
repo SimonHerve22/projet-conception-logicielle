@@ -20,7 +20,7 @@ jobs:
         uses: docker/build-push-action@v6
         # voir : https://github.com/marketplace/actions/build-and-push-docker-images#customizing
         with:
-          context: ./backend
+          context: ./backend/
           file: ./backend/Dockerfile  # Chemin vers le Dockerfile
           push: true
           tags: ${{ vars.DOCKERHUB_USERNAME }}/${{ vars.BACKEND_APPLICATION }}:latest
