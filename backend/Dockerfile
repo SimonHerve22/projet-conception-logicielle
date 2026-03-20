@@ -1,4 +1,4 @@
 FROM astral/uv:python3.13-trixie
-COPY . .
+COPY backend/
 RUN uv sync
 ENTRYPOINT ["uv", "run","python","app.py"]
