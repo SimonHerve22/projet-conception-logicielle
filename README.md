@@ -1,3 +1,20 @@
+# Comment lancer les conteneurs en local front et back
+
+Remplacer user par le pseudo dockerhub
+
+Serveur :
+
+sudo docker run -p 8000:8000 user/lolec_back
+
+Front (TUI) :
+
+sudo docker run -it -e HOST_WEBSERVICE=http://127.0.0.1:8000/ --network=host user/lolec_front
+
+ou
+
+sudo docker run --add-host=host.docker.internal:host-gateway -it -e HOST_WEBSERVICE=http://host.docker.internal:8000/ user/lolec_front
+
+
 # Architecture
 
 ```mermaid
@@ -145,7 +162,8 @@ Dans la plupart des cas, **vous n'avez pas besoin de modifier ces fichiers**, sa
 
 Pour que le projet fonctionne correctement, vous devez installer toutes les dépendances Python nécessaires.
 
-### Étapes
+### Étaensai@ensai-id-std029:~$ sudo docker run -it -e HOST_WEBSERVICE=http://127.0.0.1:8000/ --network=host gfardin/lolec_front^C
+pes
 
 1. Ouvrez votre terminal (Git Bash, PowerShell, ou autre).
 2. Installez le'environement virtuel via uv :
