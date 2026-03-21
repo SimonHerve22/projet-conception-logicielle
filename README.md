@@ -58,7 +58,7 @@ la ligue LEC.
 
 1. Lancer un terminal et placez-vous dans le dossier backend
 
-2. Installez l'environment virtuel du frontend via uv :
+2. Installez l'environment virtuel du backend via uv :
 
 ```bash
 uv sync
