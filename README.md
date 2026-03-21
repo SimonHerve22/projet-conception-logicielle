@@ -1,6 +1,6 @@
 # Projet-conception-logicielle
 
-Application de classement et statistique d’e-sports ou de sports (en fonction des bbd et api disponible)
+Application de classement et statistique d’e-sports sur la ligue européenne de LOL (LEC)
 
 Fonctionnalités : 
 
@@ -18,16 +18,18 @@ Gestion des classements et stats
 
 ## :arrow_forward: Cloner le dépôt
 
-- [ ] Ouvrir **Visual Studio Code**
-- [ ] Ouvrir **Git Bash**
-- [ ] Cloner le dépôt
-  - `git clone https://github.com/SimonHerve22/projet-conception-logicielle.git`
+1. Ouvrir **Visual Studio Code**
+2. Ouvrir **Git Bash**
+3. Cloner le dépôt
+```bash
+git clone https://github.com/SimonHerve22/projet-conception-logicielle.git
+```
 
 ## :arrow_forward: Ouvrir le dossier du projet
 
-- [ ] Lancer **Visual Studio Code**
-- [ ] Aller dans `Fichier > Ouvrir un dossier`
-- [ ] Sélectionner le dossier `projet-conception-logicielle`
+1. Lancer **Visual Studio Code**
+2. Aller dans `Fichier > Ouvrir un dossier`
+3. Sélectionner le dossier `projet-conception-logicielle`
 
 ### Dossiers du projet
 
