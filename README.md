@@ -1,4 +1,4 @@
-## :arrow_forward: Projet-conception-logicielle
+# Projet-conception-logicielle
 
 Application de classement et statistique d’e-sports ou de sports (en fonction des bbd et api disponible)
 
@@ -29,7 +29,7 @@ Gestion des classements et stats
 - [ ] Aller dans `Fichier > Ouvrir un dossier`
 - [ ] Sélectionner le dossier `projet-conception-logicielle`
 
-## :arrow_forward: Dossiers du projet
+### Dossiers du projet
 
 | Dossier | Description |
 | ------------- | --------------------------------------------------------------------------- |
@@ -94,7 +94,7 @@ python main.py
 ```
 Cela démarrera le frontend TUI, vous permettant d’interagir avec le serveur.
 
-# Comment lancer les conteneurs en local front et back
+## Comment lancer les conteneurs en local front et back
 
 Serveur :
 
@@ -109,7 +109,7 @@ ou
 sudo docker run --add-host=host.docker.internal:host-gateway -it -e HOST_WEBSERVICE=http://host.docker.internal:8000/ conteneur_frontend
 
 
-# Architecture
+## Architecture
 
 ```mermaid
 flowchart TB
