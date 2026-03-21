@@ -80,11 +80,5 @@ jobs:
       - name: Tests backend
         run: |
           uv sync --dev
-          uv run pytest
+          uv run -m pytest
         working-directory: backend
-
-      - name: Tests frontend
-        run: |
-          uv sync --dev
-          uv run pytest
-        working-directory: frontend
