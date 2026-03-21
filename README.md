@@ -98,16 +98,21 @@ Cela démarrera le frontend TUI, vous permettant d’interagir avec le serveur.
 
 Serveur :
 
+```bash
 sudo docker run -p 8000:8000 conteneur_backend
+```
 
 Front (TUI) :
 
+```bash
 sudo docker run -it -e HOST_WEBSERVICE=http://127.0.0.1:8000/ --network=host conteneur_frontend
+```
 
 ou
 
+```bash
 sudo docker run --add-host=host.docker.internal:host-gateway -it -e HOST_WEBSERVICE=http://host.docker.internal:8000/ conteneur_frontend
-
+```
 
 ## Architecture
 
