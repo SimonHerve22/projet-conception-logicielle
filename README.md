@@ -56,7 +56,11 @@ la ligue LEC.
 
 ### Étapes
 
-1. Lancer un terminal et placez-vous dans le dossier backend
+1. Lancer un nouveau terminal et placez-vous dans le dossier backend :
+
+```bash
+cd backend
+```
 
 2. Installez l'environment virtuel du backend via uv :
 
@@ -67,7 +71,7 @@ uv sync
 3. Lancez l'application avec la commande suivante :
 
 ```bash
-python app.py
+uv run python app.py
 ```
 Cela lancera le serveur.
 
@@ -79,7 +83,11 @@ L’application en ligne de commande (TUI) offre une interface **interactive sim
 
 1. Lancer d'abord sur un premier terminal le serveur backend en suivant le point précédent du Readme
 
-2. Ouvrez un nouveau terminal et placez-vous dans le dossier frontend
+2. Ouvrez un nouveau terminal et placez-vous dans le dossier frontend :
+
+```bash
+cd frontend
+```
 
 3. Installez l'environment virtuel du frontend via uv :
 
@@ -90,7 +98,7 @@ uv sync
 4. Lancez les vues avec la commande suivante :
 
 ```bash
-python main.py
+uv run python main.py
 ```
 Cela démarrera le frontend TUI, vous permettant d’interagir avec le serveur.
 
