@@ -1,0 +1,90 @@
+name: CI Python avec uv
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  format:
+    name: Format check avec Ruff
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+    
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+    
+      - name: Configurer Python
+        run: uv python install
+    
+      - name: Installer les dépendances backend
+        run: uv sync --dev
+        working-directory: backend
+    
+      - name: Vérification format backend
+        run: uv run ruff format --check
+        working-directory: backend
+
+      - name: Installer les dépendances frontend
+        run: uv sync --dev
+        working-directory: frontend
+    
+      - name: Vérification format frontend
+        run: uv run ruff format --check
+        working-directory: frontend
+
+  lint:
+    name: Linting avec Ruff
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+    
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+    
+      - name: Configurer Python
+        run: uv python install
+    
+      - name: Lint backend
+        run: |
+          uv sync --dev
+          uv run ruff check .
+        working-directory: backend
+
+      - name: Lint frontend
+        run: |
+          uv sync --dev
+          uv run ruff check .
+        working-directory: frontend
+
+  test:
+    name: Tests avec pytest
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+    
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+    
+      - name: Configurer Python
+        run: uv python install
+    
+      - name: Tests backend
+        run: |
+          uv sync --dev
+          uv run pytest
+        working-directory: backend
+
+      - name: Tests frontend
+        run: |
+          uv sync --dev
+          uv run pytest
+        working-directory: frontend
