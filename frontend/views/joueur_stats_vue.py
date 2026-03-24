@@ -15,7 +15,12 @@ class JoueurStatsVue(VueAbstraite):
     def choisir_menu(self):
         """Boucle principale du menu recherche joueur pour l'ajout d'un favori."""
         print("\n" + "-" * 50 + f"\n{Session().pseudo}\n" + "-" * 50 + "\n")
-        print("Un exemple qui existe est LEC/2025_Season/Summer_Playoffs")
+        print(
+            "=" * 50
+            + "\nSur quelle saison souhaitez-vous consultez les statistiques d'un joueur ?\n"
+            + "=" * 50
+        )
+        print("\nUn exemple qui existe est LEC/2025_Season/Summer_Playoffs.\n")
 
         annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()
         annee = int(annee)
@@ -34,10 +39,16 @@ class JoueurStatsVue(VueAbstraite):
         ]
 
         split = inquirer.select(
-            message="Choisissez le type de split :", choices=splits_possibles
+            message="Choisissez le type de split (Versus : uniquement en 2026) :",
+            choices=splits_possibles,
         ).execute()
 
-        print("infos joueur")
+        print(
+            "=" * 50
+            + "\nCi-dessous, la liste des joueurs ayant participé à ce split. Sélectionnez-en un pour obtenir ses statistiques :\n"
+            + "=" * 50
+            + "\n"
+        )
 
         # Construire l'URL pour l'API
         url = f"{host}/obtenir_stats/{annee}/{split}"
@@ -91,8 +102,8 @@ class JoueurStatsVue(VueAbstraite):
 
                 return MenuVue(message, temps_attente=1)
 
-            if choix == "Ajouter le joueur en favori":
-                url = f"{host}/favori/ajouter/{Session().pseudo}/{self.jpseudo}"
+            if choix == "Ajouter aux favoris":
+                url = f"{host}/favori/ajouter/{Session().pseudo}/{joueur.get('name')}"
                 try:
                     requests.put(url)
                 except ValueError:
