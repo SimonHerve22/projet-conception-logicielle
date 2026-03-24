@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: conteneur_frontend # mettre le nom de l'image du backend pour l'api
+          image: marinepac123/lolec_back # mettre le nom de l'image du backend pour l'api
           imagePullPolicy: Always
           resources:
             limits:

@@ -1,5 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configuration-backend
-  APP_TITLE: "LOL_API_2026"
