@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -12,19 +13,8 @@ spec:
         app: frontend
     spec:
       containers:
-        - name: frontend
-          image: marinepac123/lolec_front
-          imagePullPolicy: Always
-          resources:
-            resources:
-            requests:
-              cpu: "300m"
-              memory: "512Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-          envFrom:
-            - configMapRef:
-                name: configuration-frontend
-          ports:
-            - containerPort: 5173
+      - name: frontend
+        image: marinepac123/lolec_front
+        imagePullPolicy: Never
+        # On ne lance pas directement la TUI, on laisse le pod prêt pour exec
+        command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]

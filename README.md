@@ -104,6 +104,34 @@ uv run python main.py
 ```
 Cela démarrera le frontend TUI, vous permettant d’interagir avec le serveur.
 
+## Kubernetes
+
+Le backend de ce projet est déployé sur Kubernetes, ce qui permet de gérer automatiquement les conteneurs et de faciliter le déploiement ainsi que la mise à jour des services.
+
+L'adresse du déploiement de l'API (backend) est : https://api-lol-ensai-2026.kub.sspcloud.fr
+
+Si le service n'est plus accessible, il suffit de le redéployer :
+
+Sur le SSP Cloud, déployez un service vscode-python en sélectionnant le rôle admin dans l’onglet Role.
+Ouvrez un terminal, clonez le repository, et exécutez les commandes suivantes pour redéployer le backend.
+
+```bash
+kubectl apply -f kubernetes/backend/configmap.yaml
+```
+
+```bash
+kubectl apply -f kubernetes/backend/deployment.yaml
+```
+
+```bash
+kubectl apply -f kubernetes/backend/service.yaml
+```
+
+```bash
+kubectl apply -f kubernetes/backend/ingress.yaml
+```
+
+
 ## Comment lancer les conteneurs en local front et back
 
 Serveur :
