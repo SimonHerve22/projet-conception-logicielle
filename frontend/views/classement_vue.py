@@ -11,14 +11,14 @@ host = os.environ["HOST_WEBSERVICE"]
 
 class ClassementVue(VueAbstraite):
     def choisir_menu(self):
-        print("\n" + "=" * 55)
-        print("      📈 LEC STANDINGS & PLAYOFFS - DASHBOARD 📈")
-        print("=" * 55)
+        print("\n" + "=" * 50)
+        print("      📈 Classement d'un split de LEC - Sélection 📈")
+        print("=" * 50)
 
-        print("\n" + "-" * 50 + f"\n{Session().pseudo}\n" + "-" * 50 + "\n")
-        print("Un exemple qui existe est LEC/2025_Season/Summer_Playoffs")
+        print(f"\nUtilisateur : {Session().pseudo}\n")
+        print("Veuillez renseigner les informations de votre split :")
 
-        annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()
+        annee = inquirer.text(message="Entrez l'année (ex : 2025):").execute()
         annee = int(annee)
 
         splits_possibles = [
@@ -35,10 +35,11 @@ class ClassementVue(VueAbstraite):
         ]
 
         split = inquirer.select(
-            message="Choisissez le type de split :", choices=splits_possibles
+            message="Choisissez le type de split (Versus : uniquement 2026) :",
+            choices=splits_possibles,
         ).execute()
 
-        print("infos joueur")
+        print("Obtention des données...")
 
         # Construire l'URL pour l'API
         url = f"{host}/obtenir_standings/{annee}/{split}"
@@ -49,7 +50,7 @@ class ClassementVue(VueAbstraite):
             standings = reponse.json()
 
         except requests.RequestException as e:
-            print(f"Erreur lors de la récupération des standings : {e}")
+            print(f"Erreur lors de la récupération du classement : {e}")
 
         print("\n--- CONSULTATION D'UN CLASSEMENT ---")
 

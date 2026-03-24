@@ -11,13 +11,14 @@ host = os.environ["HOST_WEBSERVICE"]
 
 class MatchVue(VueAbstraite):
     def choisir_menu(self):
-        print("\n" + "═" * 60)
-        print("      ⚔️  LEC MATCH HISTORY - DASHBOARD ⚔️")
-        print("═" * 60)
+        print("\n" + "═" * 50)
+        print("      ⚔️  Historique des matchs de LEC ⚔️")
+        print("═" * 50)
 
-        print("Un exemple qui existe est LEC/2025_Season/Summer_Playoffs")
+        print(f"\nUtilisateur : {Session().pseudo}\n")
+        print("Veuillez renseigner les informations de votre split :")
 
-        annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()
+        annee = inquirer.text(message="Entrez l'année (ex : 2025):").execute()
         annee = int(annee)
 
         splits_possibles = [
@@ -34,11 +35,14 @@ class MatchVue(VueAbstraite):
         ]
 
         split = inquirer.select(
-            message="Choisissez le type de split :", choices=splits_possibles
+            message="Choisissez le type de split (Versus : uniquement 2026) :",
+            choices=splits_possibles,
         ).execute()
 
+        print("Obtention des données...")
+
         # Construire l'URL pour l'API
-        url = f"{host}/obtenir_stats/{annee}/{split}"
+        url = f"{host}/obtenir_matches/{annee}/{split}"
 
         try:
             reponse = requests.get(url)

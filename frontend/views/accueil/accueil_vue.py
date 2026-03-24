@@ -14,7 +14,14 @@ class AccueilVue(VueAbstraite):
             Retourne la vue choisie par l'utilisateur dans le terminal
         """
 
-        print("\n" + "-" * 50 + "\nAccueil\n" + "-" * 50 + "\n")
+        print(
+            "\n"
+            + "=" * 50
+            + "\nVeuillez vous connecter pour utiliser l'application.\n"
+            + "Si vous n'avez pas encore de compte, créez-en un !\n"
+            + "=" * 50
+            + "\n"
+        )
 
         choix = inquirer.select(
             message="Faites votre choix : ",

@@ -14,6 +14,7 @@ class ConnexionVue(VueAbstraite):
     """Vue de Connexion (saisie de pseudo)"""
 
     def choisir_menu(self):
+        print("=" * 50 + "\n")
         pseudo = inquirer.text(message="Entrez votre pseudo : ").execute()
         mot_de_passe = inquirer.text(message="Entrez votre mot de passe : ").execute()
 

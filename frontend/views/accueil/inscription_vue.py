@@ -11,6 +11,7 @@ END_POINT = "/utilisateur"
 
 class InscriptionVue(VueAbstraite):
     def choisir_menu(self):
+        print("=" * 50 + "\n")
         # Demande à l'utilisateur de saisir pseudo, mot de passe...
         pseudo = inquirer.text(message="Entrez votre pseudo : ").execute()
         valide = False

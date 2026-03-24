@@ -18,10 +18,18 @@ class InfoJoueurVue(VueAbstraite):
 
     def choisir_menu(self):
         """Boucle principale du menu info joueur."""
-        print("\n" + "-" * 50 + f"\n{self.jpseudo}\n" + "-" * 50 + "\n")
-        print("Un exemple qui existe est LEC/2025_Season/Summer_Playoffs")
+        print(
+            "\n"
+            + "=" * 50
+            + f"\nJoueur sélectionné : {self.jpseudo}\n"
+            + "=" * 50
+            + "\n"
+        )
+        print(
+            "Veuillez renseigner les informations de votre split pour lesquelles vous souhaitez obtenir les informations du joueur :"
+        )
 
-        annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()
+        annee = inquirer.text(message="Entrez l'année (ex : 2025):").execute()
         annee = int(annee)
 
         splits_possibles = [
@@ -41,7 +49,7 @@ class InfoJoueurVue(VueAbstraite):
             message="Choisissez le type de split :", choices=splits_possibles
         ).execute()
 
-        print("infos joueur")
+        print("Obtention des données...")
 
         # Construire l'URL pour l'API
         url = f"{host}/obtenir_stats/{annee}/{split}"
@@ -59,11 +67,11 @@ class InfoJoueurVue(VueAbstraite):
                     break
 
             if joueur:
-                print(f"Équipe : {joueur.get('equipe')}")
+                print("Statistiques du joueur sur ce tournoi :")
                 print(f"Tournoi : {joueur.get('tournoi', '')}")
+                print(f"Équipe : {joueur.get('equipe')}")
                 print(f"KDA : {joueur.get('kda')}")
                 print(f"Winrate : {joueur.get('winrate')}%")
-                print(f"Main Champion : {joueur.get('main_champion', '')}")
             else:
                 print("Joueur non trouvé pour cette année/split.")
 
@@ -81,13 +89,11 @@ class InfoJoueurVue(VueAbstraite):
                 requests.put(url)
             except ValueError:
                 print("Erreur lors de l'ajout du favori")
-            message = f"Vous êtes connecté sous le pseudo {Session().pseudo}"
-            from views.menu_vue import MenuVue
+            from views.favori_vue import FavoriVue
 
-            return MenuVue(message, temps_attente=1)
+            return FavoriVue("")
 
         if choix == "Retour menu":
-            message = f"Vous êtes connecté sous le pseudo {Session().pseudo}"
-            from views.menu_vue import MenuVue
+            from views.favori_vue import FavoriVue
 
-            return MenuVue(message, temps_attente=1)
+            return FavoriVue("")

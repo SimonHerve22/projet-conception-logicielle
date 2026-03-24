@@ -14,15 +14,17 @@ class JoueurStatsVue(VueAbstraite):
 
     def choisir_menu(self):
         """Boucle principale du menu recherche joueur pour l'ajout d'un favori."""
-        print("\n" + "-" * 50 + f"\n{Session().pseudo}\n" + "-" * 50 + "\n")
-        print(
-            "=" * 50
-            + "\nSur quelle saison souhaitez-vous consultez les statistiques d'un joueur ?\n"
-            + "=" * 50
-        )
-        print("\nUn exemple qui existe est LEC/2025_Season/Summer_Playoffs.\n")
 
-        annee = inquirer.text(message="Entrez l'année (ex:2025):").execute()
+        print("\n" + "═" * 50)
+        print("      ⚔️  Statistiques des joueurs de LEC ⚔️")
+        print("═" * 50)
+
+        print(f"\nUtilisateur : {Session().pseudo}\n")
+        print(
+            "Veuillez renseigner les informations de votre split pour lesquelles vous souhaitez obtenir les informations du joueur :"
+        )
+
+        annee = inquirer.text(message="Entrez l'année (ex : 2025):").execute()
         annee = int(annee)
 
         splits_possibles = [
@@ -44,7 +46,8 @@ class JoueurStatsVue(VueAbstraite):
         ).execute()
 
         print(
-            "=" * 50
+            "\n"
+            + "=" * 50
             + "\nCi-dessous, la liste des joueurs ayant participé à ce split. Sélectionnez-en un pour obtenir ses statistiques :\n"
             + "=" * 50
             + "\n"
@@ -85,11 +88,11 @@ class JoueurStatsVue(VueAbstraite):
                 if j.get("name") == choix:
                     joueur = j
                     break
-
-            print(f"Équipe : {joueur.get('equipe')}")
+            print("Statistiques du joueur sur ce tournoi :")
             print(f"Tournoi : {joueur.get('tournoi', '')}")
+            print(f"Équipe : {joueur.get('equipe')}")
             print(f"KDA : {joueur.get('kda')}")
-            print(f"Winrate : {joueur.get('winrate')}%")
+            print(f"Winrate : {joueur.get('winrate')} %")
 
             choix = inquirer.select(
                 message="Faites votre choix :",

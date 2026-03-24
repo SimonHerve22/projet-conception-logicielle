@@ -15,8 +15,7 @@ class FavoriVue(VueAbstraite):
     def choisir_menu(self):
         action_favoris = ["Retour au Menu", "Rechercher joueur favori"]
 
-        print("\n" + "-" * 50 + "\nFavoris\n" + "-" * 50 + "\n")
-        print("Retourner au menu recherche pour ajouter des joueurs favoris")
+        print("\n" + "=" * 50 + "\nGestion des joueurs favoris\n" + "=" * 50 + "\n")
 
         # Récupération des favoris
         try:
@@ -31,7 +30,7 @@ class FavoriVue(VueAbstraite):
 
         # Sélection du choix
         choix = inquirer.select(
-            message="Choisissez votre action : ",
+            message="Choisissez votre action à réaliser ou votre joueur à consulter : ",
             choices=action_favoris,
         ).execute()
 

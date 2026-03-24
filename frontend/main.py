@@ -10,7 +10,9 @@ if __name__ == "__main__":
 
     initialiser_logs("Application")
 
-    vue_courante = AccueilVue("Bienvenue sur LOLEC stat")
+    vue_courante = AccueilVue(
+        "Bienvenue sur LOLEC Stats : l'application des stats de la LEC (League of Legends European Championship) !"
+    )
     nb_erreurs = 0
 
     while vue_courante:
@@ -33,7 +35,7 @@ if __name__ == "__main__":
             )
 
     # Lorsque l'on quitte l'application
-    print("----------------------------------")
-    print("Au revoir")
+    print("=" * 50 + "\n")
+    print("Merci d'avoir utilisé l'application, on se revoit sur la faille !")
     for _ in range(3):
         print()
