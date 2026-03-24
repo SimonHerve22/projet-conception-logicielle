@@ -71,7 +71,12 @@ class InfoJoueurVue(VueAbstraite):
                 print(f"Tournoi : {joueur.get('tournoi', '')}")
                 print(f"Équipe : {joueur.get('equipe')}")
                 print(f"KDA : {joueur.get('kda')}")
-                print(f"Winrate : {joueur.get('winrate')}%")
+                print(f"Kill Participation : {joueur.get('kill_participation')} %")
+                print(f"Nombre de matchs : {joueur.get('games')}")
+                print(f"Victoires : {joueur.get('wins')}")
+                print(f"Défaites : {joueur.get('losses')}")
+                print(f"Winrate : {joueur.get('winrate')} %")
+
             else:
                 print("Joueur non trouvé pour cette année/split.")
 

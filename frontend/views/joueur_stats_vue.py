@@ -92,6 +92,10 @@ class JoueurStatsVue(VueAbstraite):
             print(f"Tournoi : {joueur.get('tournoi', '')}")
             print(f"Équipe : {joueur.get('equipe')}")
             print(f"KDA : {joueur.get('kda')}")
+            print(f"Kill Participation : {joueur.get('kill_participation')} %")
+            print(f"Nombre de matchs : {joueur.get('games')}")
+            print(f"Victoires : {joueur.get('wins')}")
+            print(f"Défaites : {joueur.get('losses')}")
             print(f"Winrate : {joueur.get('winrate')} %")
 
             choix = inquirer.select(
