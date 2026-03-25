@@ -146,6 +146,12 @@ Front (TUI) :
 sudo docker run -it -e HOST_WEBSERVICE=http://127.0.0.1:8000/ --network=host conteneur_frontend
 ```
 
+Front (TUI) via API distante :
+
+```bash
+sudo docker run -it -e HOST_WEBSERVICE=https://api-lol-ensai-2026.kub.sspcloud.fr/ --network=host conteneur_frontend
+```
+
 ou
 
 ```bash
